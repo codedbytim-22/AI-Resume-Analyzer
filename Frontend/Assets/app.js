@@ -1,12 +1,7 @@
-// ===============================
-// Global App Script
-// Handles navigation & UX flow
-// ===============================
+// Global JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* -------------------------------
-       LOGIN FORM HANDLING
-    --------------------------------*/
+  //LOGIN FORM HANDLING//
   const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
@@ -19,9 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* -------------------------------
-       RESUME UPLOAD HANDLING
-    --------------------------------*/
+  //RESUME UPLOAD HANDLING//
   const uploadForm = document.getElementById("uploadForm");
 
   if (uploadForm) {
@@ -40,9 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* -------------------------------
-       ANALYZING PAGE AUTO-REDIRECT
-    --------------------------------*/
+  //ANALYZING PAGE AUTO-REDIRECT//
   const analyzingPage = document.getElementById("analyzingPage");
 
   if (analyzingPage) {

@@ -1,10 +1,6 @@
-/* ============================================
-   AI Resume & Skills Analyzer - Main Stylesheet
-   Theme: Trust | Confidence | Corporate/Academic Professionalism
-   Updated for Mobile-First Responsive Design
-   ============================================ */
+/*AI Resume & Skills Analyzer - Main Stylesheet*/
 
-/* ===== CSS Reset & Base Styles ===== */
+/*CSS Reset & Base Styles*/
 * {
   margin: 0;
   padding: 0;
@@ -72,7 +68,7 @@ body {
     radial-gradient(at 90% 80%, rgba(13, 148, 136, 0.03) 0px, transparent 50%);
 }
 
-/* ===== Typography ===== */
+/*Typography*/
 h1,
 h2,
 h3,
@@ -129,7 +125,7 @@ a:hover {
   color: var(--color-primary);
 }
 
-/* ===== Layout Components ===== */
+/*Layout Components*/
 .container {
   width: 100%;
   max-width: 500px; /* Optimal width for forms on mobile */
@@ -148,7 +144,7 @@ a:hover {
   min-height: 70vh;
 }
 
-/* ===== Navigation ===== */
+/*Navigation*/
 nav {
   background-color: var(--color-white);
   box-shadow: var(--shadow-subtle);
@@ -192,7 +188,7 @@ nav a:hover::after {
   border-radius: 2px;
 }
 
-/* ===== Forms ===== */
+/*Forms*/
 form {
   background-color: var(--color-white);
   border-radius: var(--border-radius-lg);
@@ -247,7 +243,7 @@ input:focus {
   transform: translateY(-1px);
 }
 
-/* ===== Enhanced Button Styling ===== */
+/*Enhanced Button Styling*/
 button {
   padding: var(--space-md) var(--space-xl);
   border: none;
@@ -303,7 +299,7 @@ button:not([class*="secondary"]):hover {
   box-shadow: var(--shadow-large);
 }
 
-/* Secondary Button (if needed in future) */
+/* Secondary Button*/
 button.secondary {
   background-color: transparent;
   color: var(--color-primary);
@@ -324,7 +320,7 @@ button.secondary:hover {
   align-self: center;
 }
 
-/* ===== Message & Status Elements ===== */
+/*Message & Status Elements*/
 #welcomeMessage,
 #noAnalyses {
   padding: var(--space-lg);
@@ -345,7 +341,7 @@ button.secondary:hover {
   color: var(--color-info);
 }
 
-/* ===== Analyzing Page Animation ===== */
+/*Analyzing Page Animation*/
 .container.center {
   position: relative;
 }
@@ -391,7 +387,7 @@ button.secondary:hover {
   }
 }
 
-/* ===== Tablet Responsive (768px and up) ===== */
+/*Tablet Responsive (768px and up)*/
 @media (min-width: 768px) {
   :root {
     --font-size-xl: 2rem;
@@ -438,7 +434,7 @@ button.secondary:hover {
   }
 }
 
-/* ===== Desktop Responsive (1024px and up) ===== */
+/*Desktop Responsive (1024px and up)*/
 @media (min-width: 1024px) {
   .container {
     max-width: 800px;
@@ -472,7 +468,7 @@ button.secondary:hover {
   }
 }
 
-/* ===== Large Desktop (1440px and up) ===== */
+/*Large Desktop (1440px and up)*/
 @media (min-width: 1440px) {
   .container {
     max-width: 900px;
@@ -483,7 +479,7 @@ button.secondary:hover {
   }
 }
 
-/* ===== Small Mobile Adjustments (480px and down) ===== */
+/*Small Mobile Adjustments (480px and down)*/
 @media (max-width: 480px) {
   :root {
     --font-size-xl: 1.75rem;
