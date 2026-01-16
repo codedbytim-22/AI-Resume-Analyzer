@@ -2,26 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | Resume Analysis System</title>
     <link rel="stylesheet" href="Assets/style.css" />
   </head>
-  <body>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="upload.html">Upload Resume</a>
-      <a href="login.html">Logout</a>
-    </nav>
+  <body class="page-container">
+    <header>
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">RAS</div>
+          <span>Resume Analysis System</span>
+        </a>
+        <nav aria-label="Primary Navigation">
+          <ul>
+            <li><a href="dashboard.html" aria-current="page">Dashboard</a></li>
+            <li><a href="upload.html">Upload resume</a></li>
+            <li><a href="index.html">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <div class="container">
-      <h2>Welcome</h2>
-      <p>Upload your resume to begin analysis.</p>
+    <main>
+      <div class="container">
+        <div class="dashboard-header">
+          <h2>Dashboard</h2>
+          <p>
+            From here, you can upload a new resume for analysis or review
+            recommendations from previous submissions.
+          </p>
+        </div>
 
-      <a href="upload.html">
-        <button>Upload Resume</button>
-      </a>
-    </div>
+        <div class="dashboard-actions">
+          <div class="action-card">
+            <h3>Upload New Resume</h3>
+            <p>
+              Upload a new resume for AI analysis and get personalized
+              recommendations.
+            </p>
+            <a href="upload.html" class="btn btn-primary btn-block"
+              >Upload resume</a
+            >
+          </div>
 
-    <script src="Assets/app.js"></script>
+          <div class="action-card">
+            <h3>View Results</h3>
+            <p>
+              Review your previous resume analyses and career recommendations.
+            </p>
+            <a href="results.html" class="btn btn-secondary btn-block"
+              >View Results</a
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container footer-content">
+        <p class="copyright">
+          &copy; 2026 Resume Analysis System. All rights reserved.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>

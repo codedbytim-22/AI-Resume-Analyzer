@@ -2,22 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Analysis Results</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results | Resume Analysis System</title>
     <link rel="stylesheet" href="Assets/style.css" />
   </head>
-  <body>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="upload.html">New Analysis</a>
-    </nav>
+  <body class="page-container">
+    <header>
+      <div class="container header-content">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">RAS</div>
+          <span>Resume Analyser</span>
+        </a>
+        <nav aria-label="Primary Navigation">
+          <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="upload.html">Upload resume</a></li>
+            <li><a href="results.html" aria-current="page">Results</a></li>
+            <li><a href="login.html">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <div class="container">
-      <h2>Analysis Complete</h2>
+    <main>
+      <div class="container results-container">
+        <h2 class="text-center mb-6">Resume Analysis Results</h2>
+        <p class="text-center text-muted mb-8">
+          Your resume analysis will appear here once the AI processing is
+          complete.
+        </p>
 
-      <div id="noAnalyses">Results will appear here after AI analysis.</div>
-    </div>
+        <!-- Results will be dynamically populated by JavaScript -->
+        <div id="results-content">
+          <!-- AI Analysis Results will be inserted here -->
+        </div>
 
-    <script src="Assets/app.js"></script>
+        <div class="text-center mt-8">
+          <a href="upload.html" class="btn btn-primary"
+            >Analyze Another Resume</a
+          >
+          <a href="dashboard.html" class="btn btn-secondary"
+            >Back to Dashboard</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container footer-content">
+        <p class="copyright">
+          &copy; 2026 Resume Analysis System. All rights reserved.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>

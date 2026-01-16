@@ -2,16 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Analyzing...</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analyzing Resume</title>
     <link rel="stylesheet" href="Assets/style.css" />
   </head>
-  <body>
-    <div class="container center" id="analyzingPage">
-      <h2>Analyzing Resume</h2>
-      <p>Please wait while we process your document.</p>
-    </div>
-
-    <script src="Assets/app.js"></script>
+  <body class="page-container">
+    <main>
+      <div class="container analyzing-container">
+        <div class="loading-spinner"></div>
+        <h2>Analyzing your resume</h2>
+        <p>
+          Please wait while your resume is being reviewed. This usually takes a
+          short moment.
+        </p>
+        <div class="loading-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

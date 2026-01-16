@@ -2,27 +2,56 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Upload Resume</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Resume | Resume Analysis System</title>
     <link rel="stylesheet" href="Assets/style.css" />
   </head>
-  <body>
-    <nav>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="upload.html">Upload</a>
-    </nav>
+  <body class="page-container">
+    <header>
+      <di112233441v class="container header-content">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">RAS</div>
+          <span>Resume Analysis System</span>
+        </a>
+        <nav aria-label="Primary Navigation">
+          <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="upload.html" aria-current="page">Upload resume</a></li>
+            <li><a href="index.html">Logout</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-    <div class="container">
-      <h2>Upload Your Resume</h2>
+    <main>
+      <div class="container upload-container">
+        <div class="form-card">
+          <h2 class="form-title">Upload resume</h2>
+          <p class="form-subtitle">
+            Select your resume file to begin the analysis. Supported formats
+            include PDF and Word documents.
+          </p>
 
-      <form id="uploadForm">
-        <label>Select Resume (PDF or DOCX)</label>
-        <input type="file" id="resumeFile" required />
+          <form id="uploadForm">
+            <div class="form-group">
+              <label for="resume" class="form-label">Resume file</label>
+              <input type="file" id="resume" class="form-input" required />
+            </div>
 
-        <button type="submit">Start Analysis</button>
-      </form>
-    </div>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Submit for analysis
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
 
-    <script src="Assets/app.js"></script>
+    <footer>
+      <div class="container footer-content">
+        <p class="copyright">
+          &copy; 2026 Resume Analysis System. All rights reserved.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
