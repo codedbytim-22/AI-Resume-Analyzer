@@ -1,4 +1,68 @@
 // Assets/JS/app.js
+// Update CONFIG at the top of your file:
+const CONFIG = {
+  VERSION: "1.4.0",
+  // ... existing config ...
+
+  // NEW: Premium Configuration
+  PREMIUM: {
+    // Limits for free tier
+    FREE_LIMITS: {
+      MAX_GOALS: 1,
+      MAX_EXPORTS: 0,
+      HAS_WRAPPED: false,
+      HAS_ANALYTICS: false,
+      HAS_CLOUD_SYNC: false,
+      HAS_CUSTOM_THEMES: false,
+    },
+
+    // Premium tier limits (for future)
+    PREMIUM_LIMITS: {
+      MAX_GOALS: Infinity,
+      MAX_EXPORTS: Infinity,
+      HAS_WRAPPED: true,
+      HAS_ANALYTICS: true,
+      HAS_CLOUD_SYNC: true,
+      HAS_CUSTOM_THEMES: true,
+    },
+
+    // Fake door settings
+    FAKE_DOOR: {
+      ENABLED: true,
+      TRACK_CLICKS: true,
+      SHOW_WAITLIST: true,
+    },
+
+    // Storage keys
+    STORAGE_KEYS: {
+      CLICKS: "dayly_premium_clicks",
+      WAITLIST: "dayly_premium_waitlist",
+    },
+  },
+};
+
+// Add this helper function for data safety
+function ensureDataSafety(storageKey, defaultValue) {
+  try {
+    const existing = localStorage.getItem(storageKey);
+    if (!existing || existing === "undefined" || existing === "null") {
+      localStorage.setItem(storageKey, JSON.stringify(defaultValue));
+      return defaultValue;
+    }
+    return JSON.parse(existing);
+  } catch (e) {
+    console.error(`Data safety error for ${storageKey}:`, e);
+    // Never reset existing data on error
+    try {
+      const existing = localStorage.getItem(storageKey);
+      if (existing) return JSON.parse(existing);
+    } catch (e2) {
+      // Last resort: use default but don't overwrite storage
+      return defaultValue;
+    }
+    return defaultValue;
+  }
+}
 import { analyzeResumeWithAI } from "./ai.js";
 
 // 🔹 IMPORTS (MUST BE FIRST)
