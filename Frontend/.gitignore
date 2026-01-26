@@ -1,0 +1,10 @@
+# Secrets
+.env
+Assets/JS/config.local.js
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Node (future-proof)
+node_modules
