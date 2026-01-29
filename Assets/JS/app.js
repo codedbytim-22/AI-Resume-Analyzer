@@ -63,7 +63,6 @@ function ensureDataSafety(storageKey, defaultValue) {
     return defaultValue;
   }
 }
-import { analyzeResumeWithAI } from "./ai.js";
 
 // 🔹 IMPORTS (MUST BE FIRST)
 import { auth } from "./firebase.js";
@@ -183,11 +182,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = await extractTextFromPDF(file);
 
         // 🔥 REAL AI ANALYSIS
-        const analysis = await analyzeResumeWithAI(text);
+        try {
+          // Send resume text to your API
+          const response = await fetch("/api/analyze", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text }),
+          });
 
-        sessionStorage.setItem("analysis", JSON.stringify(analysis));
-        sessionStorage.setItem("resumeName", file.name);
-        sessionStorage.setItem("resumeUploaded", "true");
+          if (!response.ok) {
+            throw new Error("API request failed");
+          }
+
+          const analysis = await response.json();
+
+          sessionStorage.setItem("analysis", JSON.stringify(analysis));
+          sessionStorage.setItem("resumeName", file.name);
+          sessionStorage.setItem("resumeUploaded", "true");
+
+          window.location.href = "analyzing.html";
+        } catch (err) {
+          console.error(err);
+          alert("Failed to analyze resume.");
+        }
 
         window.location.href = "analyzing.html";
       } catch (err) {
