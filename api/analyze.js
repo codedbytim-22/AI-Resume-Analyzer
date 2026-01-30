@@ -1,39 +1,41 @@
-import OpenAI from "openai";
-
-const openai = new OpenAI({
-  apiKey:
-    process.env.sk -
-    proj -
-    tIr8bdWYFVuVG8Kc2Z8Ra8KUgd0U -
-    OhlY3ADLnesokgn3bPIt3f3vZM0pM7NrvBWOkklfz3aA8T3BlbkFJaqlbHAe25DlWkK7p7ObbsdelDNvLrecPqWDQiIrbebCQjXHl4sk19RNNgOjLwPsh6SEwENbIQA,
-});
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method Not Allowed" });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { text } = req.body;
-
   try {
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: "You are a resume analysis assistant." },
-        { role: "user", content: text },
-      ],
-      temperature: 0.7,
-    });
+    const { text } = req.body;
 
-    const analysis = {
-      skills: ["HTML", "CSS", "JS"], // extract from AI output ideally
-      recommendations: ["Learn React"],
-      careers: ["Frontend Developer"],
-    };
+    if (!text) {
+      return res.status(400).json({ error: "No resume text provided" });
+    }
 
-    return res.status(200).json(analysis);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: "AI request failed" });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+    const prompt = `
+Analyze this resume and return JSON ONLY in this format:
+
+{
+  "skills": [],
+  "recommendations": [],
+  "careers": []
+}
+
+Resume:
+${text}
+`;
+
+    const result = await model.generateContent(prompt);
+    const response = result.response.text();
+
+    const json = response.match(/\{[\s\S]*\}/)[0];
+
+    return res.status(200).json(JSON.parse(json));
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "AI analysis failed" });
   }
 }
