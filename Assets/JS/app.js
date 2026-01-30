@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.clear();
 
       if (body.classList.contains("protected")) {
-        window.location.replace("login.html");
+        window.location.href = "/login.html";
       }
     }
   });
@@ -46,8 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
           emailInput.value.trim(),
           passwordInput.value.trim(),
         );
-        // let onAuthStateChanged handle redirects
-        window.location.replace("dashboard.html");
+        window.location.href = "/dashboard.html";
       } catch (err) {
         alert(err.message);
       }
@@ -77,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
           emailInput.value.trim(),
           passwordInput.value.trim(),
         );
-        window.location.replace("dashboard.html");
+        window.location.href = "/dashboard.html";
       } catch (err) {
         alert(err.message);
       }
@@ -120,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.setItem("analysis", JSON.stringify(analysis));
         sessionStorage.setItem("resumeName", file.name);
 
-        window.location.replace("analyzing.html");
+        window.location.href = "/analyzing.html";
       } catch (err) {
         console.error(err);
         alert("Resume analysis failed.");
@@ -133,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ============================== */
   if (document.querySelector(".analyzing-container")) {
     setTimeout(() => {
-      window.location.replace("results.html");
+      window.location.href = "/results.html";
     }, 3000);
   }
 
@@ -143,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const results = document.getElementById("results-content");
   if (results) {
     const analysis = JSON.parse(sessionStorage.getItem("analysis"));
+
     if (!analysis) {
       results.innerHTML = "<p>No analysis found.</p>";
       return;
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", async () => {
       await signOut(auth);
       sessionStorage.clear();
-      window.location.replace("index.html");
+      window.location.href = "/index.html";
     });
   }
 });
