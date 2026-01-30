@@ -1,5 +1,8 @@
 {
-  "name": "ai-resume-analyzer",
+  "name": "ai-resume",
   "version": "1.0.0",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1"
+  }
 }
