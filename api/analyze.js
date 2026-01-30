@@ -8,28 +8,20 @@ export default async function handler(req, res) {
   try {
     const { text } = req.body;
 
-    if (!text) {
-      return res.status(400).json({ error: "No resume text provided" });
+    if (!text || text.length < 50) {
+      return res.status(400).json({ error: "Invalid resume text" });
     }
 
-    // Check if API key exists
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      console.error("GEMINI_API_KEY not set!");
-      // TEMP fallback response for testing
-      return res.status(200).json({
-        skills: ["JavaScript", "HTML", "CSS"],
-        recommendations: ["Improve formatting", "Add projects"],
-        careers: ["Frontend Developer", "Web Developer"],
-      });
-    }
-
-    // Initialize Gemini
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash",
+    });
 
     const prompt = `
-Analyze this resume and return JSON ONLY in this format:
+You are an ATS resume analyzer.
+
+Return ONLY valid JSON in the exact format below.
+Do NOT add explanations, markdown, or extra text.
 
 {
   "skills": [],
@@ -41,29 +33,23 @@ Resume:
 ${text}
 `;
 
-    // Call Gemini
     const result = await model.generateContent(prompt);
+    const raw = result.response.text();
 
-    // Some safety checks
-    const rawResponse = result?.response?.text?.() || "";
-    const match = rawResponse.match(/\{[\s\S]*\}/);
-    if (!match) {
-      console.error("AI returned invalid JSON:", rawResponse);
-      return res.status(500).json({
-        error: "AI returned invalid response",
-        raw: rawResponse,
-      });
+    // 🔒 SAFELY extract JSON
+    const start = raw.indexOf("{");
+    const end = raw.lastIndexOf("}");
+
+    if (start === -1 || end === -1) {
+      throw new Error("Invalid AI response format");
     }
 
-    const json = JSON.parse(match[0]);
-    return res.status(200).json(json);
+    const jsonString = raw.substring(start, end + 1);
+    const parsed = JSON.parse(jsonString);
+
+    return res.status(200).json(parsed);
   } catch (error) {
-    console.error("AI analyze error:", error);
-    // Return fallback response if AI fails
-    return res.status(200).json({
-      skills: ["JavaScript", "HTML", "CSS"],
-      recommendations: ["Improve formatting", "Add projects"],
-      careers: ["Frontend Developer", "Web Developer"],
-    });
+    console.error("ANALYZE ERROR:", error);
+    return res.status(500).json({ error: "AI analysis failed" });
   }
 }
