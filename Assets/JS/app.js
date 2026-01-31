@@ -9,9 +9,10 @@ import {
 
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
+  const isProtected = body.classList.contains("protected");
 
   /* ==============================
-     AUTH STATE (SINGLE SOURCE OF TRUTH)
+     AUTH STATE (GUARD ONLY)
   ============================== */
   onAuthStateChanged(auth, (user) => {
     const emailSpan = document.getElementById("userEmail");
@@ -22,9 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (emailSpan) emailSpan.textContent = user.email;
     } else {
       sessionStorage.clear();
-
-      if (body.classList.contains("protected")) {
-        window.location.href = "/login.html";
+      if (isProtected) {
+        window.location.replace("/login.html");
       }
     }
   });
@@ -39,14 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-
       try {
         await signInWithEmailAndPassword(
           auth,
           emailInput.value.trim(),
           passwordInput.value.trim(),
         );
-        window.location.href = "/dashboard.html";
+        window.location.replace("/dashboard.html");
       } catch (err) {
         alert(err.message);
       }
@@ -76,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
           emailInput.value.trim(),
           passwordInput.value.trim(),
         );
-        window.location.href = "/dashboard.html";
+        window.location.replace("/dashboard.html");
       } catch (err) {
         alert(err.message);
       }
@@ -113,13 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify({ text }),
         });
 
-        if (!response.ok) throw new Error("AI analysis failed");
+        if (!response.ok) throw new Error("AI failed");
 
         const analysis = await response.json();
         sessionStorage.setItem("analysis", JSON.stringify(analysis));
         sessionStorage.setItem("resumeName", file.name);
 
-        window.location.href = "/analyzing.html";
+        window.location.replace("/analyzing.html");
       } catch (err) {
         console.error(err);
         alert("Resume analysis failed.");
@@ -132,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ============================== */
   if (document.querySelector(".analyzing-container")) {
     setTimeout(() => {
-      window.location.href = "/results.html";
+      window.location.replace("/results.html");
     }, 3000);
   }
 
@@ -142,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const results = document.getElementById("results-content");
   if (results) {
     const analysis = JSON.parse(sessionStorage.getItem("analysis"));
-
     if (!analysis) {
       results.innerHTML = "<p>No analysis found.</p>";
       return;
@@ -168,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutBtn.addEventListener("click", async () => {
       await signOut(auth);
       sessionStorage.clear();
-      window.location.href = "/index.html";
+      window.location.replace("/index.html");
     });
   }
 });
